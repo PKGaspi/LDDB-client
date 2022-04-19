@@ -53,7 +53,8 @@ public class KinectGestures
 		Jump,
 		Squat,
 		Push,
-		Pull
+		Pull,
+		Clap
 	}
 	
 	
@@ -1102,7 +1103,41 @@ public class KinectGestures
 						break;
 				}
 				break;
+			case Gestures.Clap:
+				switch (gestureData.state) {
+					case 0:
+							// Debug.Log("left .- " + jointsPos[leftHandIndex].x);
+							// Debug.Log("right .- "  + jointsPos[rightHandIndex].x);
+							
+							Debug.Log("x1 .- "  + Mathf.Abs(jointsPos[rightHandIndex].x - jointsPos[leftHandIndex].x));
 
+						if (jointsTracked[rightHandIndex] && jointsTracked[rightHandIndex] &&
+							Mathf.Abs(jointsPos[rightHandIndex].y - jointsPos[leftHandIndex].y) <= .1f &&
+							Mathf.Abs(jointsPos[rightHandIndex].x - jointsPos[leftHandIndex].x) >= .5f) 
+						{
+							SetGestureJoint(ref gestureData, timestamp, rightHandIndex, jointsPos[rightHandIndex]);
+							gestureData.progress = .5f;
+						}
+						break;
+
+					case 1:
+						if((timestamp - gestureData.timestamp) < 1f) {
+							Debug.Log("x2 .- "  + Mathf.Abs(jointsPos[rightHandIndex].x - jointsPos[leftHandIndex].x));
+
+							if (jointsTracked[rightHandIndex] && jointsTracked[rightHandIndex] &&
+								Mathf.Abs(jointsPos[rightHandIndex].y - jointsPos[leftHandIndex].y) <= .1f &&
+								Mathf.Abs(jointsPos[rightHandIndex].x - jointsPos[leftHandIndex].x) <= .3f) 
+							{
+								CheckPoseComplete(ref gestureData, timestamp, jointsPos[gestureData.joint], true, 0f);
+								gestureData.progress = 1f;
+							}
+						}
+						else {
+							SetGestureCancelled(ref gestureData);
+						}
+						break;
+				}
+				break;
 			// here come more gesture-cases
 		}
 	}
