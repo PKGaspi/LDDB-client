@@ -19,7 +19,7 @@ public class SimpleGestureListener : MonoBehaviour, KinectGestures.GestureListen
 
 		manager.DetectGesture(userId, KinectGestures.Gestures.Jump);
 		manager.DetectGesture(userId, KinectGestures.Gestures.Squat);
-		manager.DetectGesture(userId, KinectGestures.Gestures.Clap);
+	//	manager.DetectGesture(userId, KinectGestures.Gestures.Clap);
 
 //		manager.DetectGesture(userId, KinectGestures.Gestures.Push);
 //		manager.DetectGesture(userId, KinectGestures.Gestures.Pull);
@@ -29,7 +29,7 @@ public class SimpleGestureListener : MonoBehaviour, KinectGestures.GestureListen
 		
 		if(GestureInfo != null)
 		{
-			GestureInfo.text = "Jump, Squat or Clap.";
+			GestureInfo.text = "jump or squat";
 		}
 	}
 	

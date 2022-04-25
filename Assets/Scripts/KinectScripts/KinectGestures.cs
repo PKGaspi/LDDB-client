@@ -1113,7 +1113,7 @@ public class KinectGestures
 
 						if (jointsTracked[rightHandIndex] && jointsTracked[rightHandIndex] &&
 							Mathf.Abs(jointsPos[rightHandIndex].y - jointsPos[leftHandIndex].y) <= .1f &&
-							Mathf.Abs(jointsPos[rightHandIndex].x - jointsPos[leftHandIndex].x) >= .5f) 
+							Mathf.Abs(jointsPos[rightHandIndex].x - jointsPos[leftHandIndex].x) >= .3f) 
 						{
 							SetGestureJoint(ref gestureData, timestamp, rightHandIndex, jointsPos[rightHandIndex]);
 							gestureData.progress = .5f;
