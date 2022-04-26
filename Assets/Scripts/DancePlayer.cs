@@ -51,7 +51,10 @@ public class DancePlayer : MonoBehaviour
             {
                 while (!uwr.isDone) await Task.Delay(5);
     
-                if (uwr.isNetworkError || uwr.isHttpError) Debug.Log($"{uwr.error}");
+                if ((uwr.result == UnityWebRequest.Result.ConnectionError) || 
+                    (uwr.result == UnityWebRequest.Result.ProtocolError)) {
+                    Debug.Log($"{uwr.error}");
+                }
                 else
                 {
                     clip = DownloadHandlerAudioClip.GetContent(uwr);
