@@ -1109,7 +1109,7 @@ public class KinectGestures
 							// Debug.Log("left .- " + jointsPos[leftHandIndex].x);
 							// Debug.Log("right .- "  + jointsPos[rightHandIndex].x);
 							
-							Debug.Log("x1 .- "  + Mathf.Abs(jointsPos[rightHandIndex].x - jointsPos[leftHandIndex].x));
+							// Debug.Log("x1 .- "  + Mathf.Abs(jointsPos[rightHandIndex].x - jointsPos[leftHandIndex].x));
 
 						if (jointsTracked[rightHandIndex] && jointsTracked[rightHandIndex] &&
 							Mathf.Abs(jointsPos[rightHandIndex].y - jointsPos[leftHandIndex].y) <= .1f &&
@@ -1122,7 +1122,7 @@ public class KinectGestures
 
 					case 1:
 						if((timestamp - gestureData.timestamp) < 1f) {
-							Debug.Log("x2 .- "  + Mathf.Abs(jointsPos[rightHandIndex].x - jointsPos[leftHandIndex].x));
+							// Debug.Log("x2 .- "  + Mathf.Abs(jointsPos[rightHandIndex].x - jointsPos[leftHandIndex].x));
 
 							if (jointsTracked[rightHandIndex] && jointsTracked[rightHandIndex] &&
 								Mathf.Abs(jointsPos[rightHandIndex].y - jointsPos[leftHandIndex].y) <= .1f &&

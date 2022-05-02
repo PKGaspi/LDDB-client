@@ -11,8 +11,10 @@ public static class DanceParser {
         dance.filePath = danceFilePath;
         
         // Parse song name and length
+        int version = reader.ReadLine();
         dance.songFilePath = reader.ReadLine();
         dance.duration = float.Parse(reader.ReadLine());
+
         reader.ReadLine(); // Empty line
 
         // Parse list of moves
@@ -31,12 +33,15 @@ public static class DanceParser {
             float moveEnd = float.Parse(timestamps[1]);
             // Move name
             string gestureName = reader.ReadLine();
+            // Move points
+            int movePoints = int.Parse(reader.ReadLine());
             // Empty line
             reader.ReadLine();
             MoveData move = new MoveData();
             move.moveStart = moveStart;
             move.moveEnd = moveEnd;
             move.gestureName = gestureName;
+            move.movePoints = movePoints;
             moves.Add(move);
             moveIndex++;
         }
