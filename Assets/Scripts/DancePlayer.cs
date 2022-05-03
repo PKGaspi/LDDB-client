@@ -10,32 +10,42 @@ public class DancePlayer : MonoBehaviour
 {
     private AudioSource songSource;
     private string danceFileFolder = "Dances";
+    public DanceUI danceUI;
     public string danceFileName;
     public DanceData dance;
+    public bool mute = false;
 
     // Start is called before the first frame update
     async void Start()
     {  
+        if (danceFileName == null) {
+            return;
+        }
+
         songSource = gameObject.GetComponent(typeof(AudioSource)) as AudioSource;
         dance = DanceParser.Parse(Path.Combine(Application.dataPath, danceFileFolder, danceFileName)); 
         dance.danceName = "Super chachi dance";
         dance.author = "El gran, único e inigualable Gaspi";
-        dance.LogDanceInfo();
+        
+        // Debug
+        dance.LogInfo();
         dance.LogMoveInfo(0);
         dance.LogMoveInfo(1);
         dance.LogMoveInfo(2);
+        
         songSource.clip = await LoadClip(Path.Combine(Application.dataPath, danceFileFolder, dance.songFilePath));
-        Play();
+        if (!mute)
+            songSource.Play();
+        foreach (MoveData move in dance.moves) {
+            danceUI.LoadMove(move);
+        }
+        danceUI.playing = true;
     }
 
     // Update is called once per frame
     void Update()
     {
         
-    }
-
-    void Play() {
-        songSource.Play();
     }
 
     // Source: https://answers.unity.com/questions/1518536/load-audioclip-from-folder-on-computer-into-game-i.html
@@ -53,7 +63,7 @@ public class DancePlayer : MonoBehaviour
     
                 if ((uwr.result == UnityWebRequest.Result.ConnectionError) || 
                     (uwr.result == UnityWebRequest.Result.ProtocolError)) {
-                    Debug.Log($"{uwr.error}");
+                    Debug.LogError($"{uwr.error}");
                 }
                 else
                 {
@@ -62,10 +72,11 @@ public class DancePlayer : MonoBehaviour
             }
             catch (Exception err)
             {
-                Debug.Log($"{err.Message}, {err.StackTrace}");
+                Debug.LogError($"{err.Message}, {err.StackTrace}");
             }
         }
     
         return clip;
- }
+    }
+
 }

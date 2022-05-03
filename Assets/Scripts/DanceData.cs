@@ -1,6 +1,7 @@
 using UnityEngine;
 
 public class DanceData {
+    public int version;
     public string filePath;
     public string danceName;
     public string author;
@@ -8,7 +9,8 @@ public class DanceData {
     public float duration;
     public MoveData[] moves;
 
-    public void LogDanceInfo() {
+    public void LogInfo() {
+        Debug.Log("File version - " + version);
         Debug.Log("Name - " + danceName);
         Debug.Log("Author - " + author);
         Debug.Log("File - " + songFilePath);
@@ -17,8 +19,6 @@ public class DanceData {
     }
 
     public void LogMoveInfo(int moveIndex) {
-        Debug.Log("Move " + moveIndex + " name - " + moves[moveIndex].gestureName);
-        Debug.Log("Move " + moveIndex + " start - " + moves[moveIndex].moveStart);
-        Debug.Log("Move " + moveIndex + " end - " + moves[moveIndex].moveEnd);
+        moves[moveIndex].LogInfo();
     }
 }
