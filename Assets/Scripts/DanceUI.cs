@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class DanceUI : MonoBehaviour
 {
-    public bool playing = false;
-    public float speed = 100f; // Speed at which the icons move from right to left.
-    public RectTransform contents;
-    
+    public Text scoreText;
+    public Text timeText;
+    public GestureIconsBar gestureIconsBar;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,24 +18,21 @@ public class DanceUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playing) {
-            contents.anchoredPosition = new Vector2(
-                contents.anchoredPosition.x - speed * Time.deltaTime,
-                contents.anchoredPosition.y
-            );
-        }
+        
     }
-    
-    // Receives MoveData move and loads the needed info into the game scene.
+
+    public void SetScore(int value) {
+        scoreText.text = "Score: " + value;
+    }
+
+    public void SetTime(float value) {
+        int mins = (int) Mathf.Floor(value / 60);
+        int secs = (int) Mathf.Floor(value);
+        int milisecs = (int) ((value - secs)*1000);
+        timeText.text = $"Time: {mins:00}:{secs:00},{milisecs:000}";
+    }
+
     public void LoadMove(MoveData move) {
-        // TODO: look for this gesture image (somewhere?)
-        // TODO: Create a UI image gameobject
-        GameObject gestureIcon = new GameObject();
-        Image gestureImage = gestureIcon.AddComponent<Image>();
-        // Add gameobject to contents
-        gestureIcon.transform.SetParent(contents);
-        // TODO: Calculate image postion based on the speed and on move.startTime
-        ((RectTransform) gestureIcon.transform).localPosition = new Vector2(speed * move.startTime, 0);
-        // Maybe do the same for move.endTime ???
+        gestureIconsBar.LoadMove(move);
     }
 }

@@ -8,10 +8,13 @@ using UnityEngine.Networking;
 
 public class DancePlayer : MonoBehaviour
 {
+    private float timestamp = 0f;
+    private int score = 0;
     private AudioSource songSource;
     private string danceFileFolder = "Dances";
     public DanceUI danceUI;
     public string danceFileName;
+    public bool playing = true;
     public DanceData dance;
     public bool mute = false;
 
@@ -39,13 +42,21 @@ public class DancePlayer : MonoBehaviour
         foreach (MoveData move in dance.moves) {
             danceUI.LoadMove(move);
         }
-        danceUI.playing = true;
+        danceUI.gestureIconsBar.playing = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (!playing) {
+            return;
+        }
+
+        timestamp += Time.deltaTime;
+        Debug.Log("timestamp" +( timestamp - Mathf.Floor(timestamp)));
+        danceUI.SetTime(timestamp);
+        danceUI.SetScore(100);
+
     }
 
     // Source: https://answers.unity.com/questions/1518536/load-audioclip-from-folder-on-computer-into-game-i.html
