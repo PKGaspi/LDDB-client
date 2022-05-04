@@ -12,10 +12,12 @@ public class DancePlayer : MonoBehaviour
     private int score = 0;
     private AudioSource songSource;
     private string danceFileFolder = "Dances";
+    private DanceData dance;
+    
     public DanceUI danceUI;
     public string danceFileName;
-    public bool playing = true;
-    public DanceData dance;
+    public bool autoplay = false;
+    private bool playing = false;
     public bool mute = false;
 
     // Start is called before the first frame update
@@ -37,12 +39,13 @@ public class DancePlayer : MonoBehaviour
         dance.LogMoveInfo(2);
         
         songSource.clip = await LoadClip(Path.Combine(Application.dataPath, danceFileFolder, dance.songFilePath));
-        if (!mute)
-            songSource.Play();
+
         foreach (MoveData move in dance.moves) {
             danceUI.LoadMove(move);
         }
-        danceUI.gestureIconsBar.playing = true;
+
+        if (autoplay)
+            Play();
     }
 
     // Update is called once per frame
@@ -53,9 +56,16 @@ public class DancePlayer : MonoBehaviour
         }
 
         timestamp += Time.deltaTime;
-        Debug.Log("timestamp" +( timestamp - Mathf.Floor(timestamp)));
         danceUI.SetTime(timestamp);
         danceUI.SetScore(100);
+
+    }
+
+    public void Play() {
+        playing = true;
+        if (!mute)
+            songSource.Play();
+        danceUI.gestureIconsBar.playing = true;
 
     }
 

@@ -419,7 +419,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   danceUI: {fileID: 867322450}
   danceFileName: test.dnc
-  playing: 1
+  autoplay: 1
   mute: 1
 --- !u!4 &1193331679
 Transform:
