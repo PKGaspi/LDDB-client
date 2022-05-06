@@ -8,6 +8,7 @@ public class DanceUI : MonoBehaviour
 {
     public Text scoreText;
     public Text timeText;
+    public Text moveText;
     public GestureIconsBar gestureIconsBar;
 
     // Start is called before the first frame update
@@ -23,7 +24,7 @@ public class DanceUI : MonoBehaviour
     }
 
     public void SetScore(int value) {
-        scoreText.text = "Score: " + value;
+        scoreText.text = $"Score: {value}";
     }
 
     public void SetTime(float value) {
@@ -31,6 +32,10 @@ public class DanceUI : MonoBehaviour
         int secs = (int) Math.Floor(value);
         int milisecs = (int) Math.Round((value - secs)*1000);
         timeText.text = $"Time: {mins:00}:{secs:00},{milisecs:000}";
+    }
+
+    public void SetMoveIndex(int value) {
+        moveText.text = $"Move #: {value}";
     }
 
     public void LoadMove(MoveData move) {

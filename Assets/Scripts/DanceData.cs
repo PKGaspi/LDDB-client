@@ -19,6 +19,9 @@ public class DanceData {
     }
 
     public void LogMoveInfo(int moveIndex) {
-        moves[moveIndex].LogInfo();
+        if (moveIndex < moves.Length)
+            moves[moveIndex].LogInfo();
+        else
+            Debug.LogWarning($"No move #{moveIndex} for this dance.");
     }
 }
