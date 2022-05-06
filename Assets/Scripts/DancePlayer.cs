@@ -44,6 +44,8 @@ public class DancePlayer : MonoBehaviour
             danceUI.LoadMove(move);
         }
 
+        songSource.mute = mute;
+
         if (autoplay)
             Play();
     }
@@ -56,6 +58,13 @@ public class DancePlayer : MonoBehaviour
         }
 
         timestamp += Time.deltaTime;
+
+        if (timestamp >= dance.duration) {
+            Stop();
+            timestamp = dance.duration;
+            // TODO: Change to results scene
+        }
+        
         danceUI.SetTime(timestamp);
         danceUI.SetScore(100);
 
@@ -63,10 +72,15 @@ public class DancePlayer : MonoBehaviour
 
     public void Play() {
         playing = true;
-        if (!mute)
-            songSource.Play();
+        songSource.Play();
         danceUI.gestureIconsBar.playing = true;
 
+    }
+
+    public void Stop() {
+        playing = false;
+        songSource.Stop();
+        danceUI.gestureIconsBar.playing = false;
     }
 
     // Source: https://answers.unity.com/questions/1518536/load-audioclip-from-folder-on-computer-into-game-i.html

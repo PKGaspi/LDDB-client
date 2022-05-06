@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,9 +27,9 @@ public class DanceUI : MonoBehaviour
     }
 
     public void SetTime(float value) {
-        int mins = (int) Mathf.Floor(value / 60);
-        int secs = (int) Mathf.Floor(value);
-        int milisecs = (int) ((value - secs)*1000);
+        int mins = (int) Math.Floor(value / 60);
+        int secs = (int) Math.Floor(value);
+        int milisecs = (int) Math.Round((value - secs)*1000);
         timeText.text = $"Time: {mins:00}:{secs:00},{milisecs:000}";
     }
 
