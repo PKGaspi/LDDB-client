@@ -11,4 +11,4 @@ To create new songs, use the in-game editor and publish them on the official ser
 
 ## Server
 
-The server code is available in [PKGaspi/LDDB-server](https://github.com/PKGaspi/LDDB-server)
+The server code is available in [PKGaspi/LDDB-server](https://github.com/PKGaspi/LDDB-server).
