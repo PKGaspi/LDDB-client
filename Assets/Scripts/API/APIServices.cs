@@ -1,62 +1,80 @@
 using System;
 using System.IO;
 using System.Net;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public static class APIServices
 {
     private const String BASE_URL = "http://localhost:8000";
     
-    public static DanceInfo GetDanceInfo(String id) {
-        String url = BASE_URL + "/dance/" + id + "/info";
-        Debug.Log("GET " + url);
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-        StreamReader reader = new StreamReader(response.GetResponseStream());
-        String jsonResponse = reader.ReadToEnd();
-        Debug.Log("GET " + url + " response: " + jsonResponse);
-        DanceInfo dance = JsonUtility.FromJson<DanceInfo>(jsonResponse);
-        return dance;
+    // Source: https://github.com/crevelop/unitywebrequest-tutorial
+    private static async Task<T> GetInfo<T>(String uri) {
+        String url = BASE_URL + uri;
+        try {
+            Debug.Log("GET " + url);
+            using var www = UnityWebRequest.Get(url);
+            //www.SetRequestHeader("application/json", )
+            var operation = www.SendWebRequest();
+
+            while (!operation.isDone)
+                await Task.Yield();
+
+            if (www.result != UnityWebRequest.Result.Success)
+                Debug.LogError($"Failed: {www.error}");
+            
+            Debug.Log("GET " + url + " Result: " + www.downloadHandler.text);
+
+            return JsonUtility.FromJson<T>(www.downloadHandler.text);
+        }
+        catch (Exception e) {
+            Debug.LogError($"{nameof(GetInfo)} failed: {e.Message}");
+        }
+        return default;
     }
 
-    public static SongInfo GetSongInfo(String id) {
-        String url = BASE_URL + "/song/" + id + "/info";
-        Debug.Log("GET " + url);
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-        StreamReader reader = new StreamReader(response.GetResponseStream());
-        String jsonResponse = reader.ReadToEnd();
-        Debug.Log("GET " + url + " response: " + jsonResponse);
-        SongInfo song = JsonUtility.FromJson<SongInfo>(jsonResponse);
-        return song;
+    private async static Task<InfoList<T>> GetInfoList<T>(String uri) {
+        String url = BASE_URL + uri;
+        try {
+            Debug.Log("GET " + url);
+            using var www = UnityWebRequest.Get(url);
+            //www.SetRequestHeader("application/json", )
+            var operation = www.SendWebRequest();
+
+            while (!operation.isDone)
+                await Task.Yield();
+
+            if (www.result != UnityWebRequest.Result.Success)
+                Debug.LogError($"Failed: {www.error}");
+            
+            Debug.Log("GET " + url + " Result: " + www.downloadHandler.text);
+
+            return JsonUtility.FromJson<InfoList<T>>(www.downloadHandler.text);
+        }
+        catch (Exception e) {
+            Debug.LogError($"{nameof(GetInfo)} failed: {e.Message}");
+        }
+        return default;
     }
 
-    public static InfoList<SongInfo> GetSongInfoList() {
-        String url = BASE_URL + "/song_list";
-        Debug.Log("GET " + url);
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-        StreamReader reader = new StreamReader(response.GetResponseStream());
-        String jsonResponse = reader.ReadToEnd();
-        Debug.Log("GET " + url + " response: " + jsonResponse);
-        InfoList<SongInfo> list = JsonUtility.FromJson<InfoList<SongInfo>>(jsonResponse);
-        return list;
-    }
-
-    public static InfoList<DanceInfo> GetDanceInfoList() {
-        String url = BASE_URL + "/dance_list";
-        Debug.Log("GET " + url);
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-        StreamReader reader = new StreamReader(response.GetResponseStream());
-        String jsonResponse = reader.ReadToEnd();
-        Debug.Log("GET " + url + " response: " + jsonResponse);
-        InfoList<DanceInfo> list = JsonUtility.FromJson<InfoList<DanceInfo>>(jsonResponse);
-        return list;
+    public static Task<SongInfo> GetSongInfo(String id) {
+        return GetInfo<SongInfo>($"/song/{id}/info");
     }
     
+    public static Task<DanceInfo> GetDanceInfo(String id) {
+        return GetInfo<DanceInfo>($"/dance/{id}/info");
+    }
 
+    public static Task<InfoList<SongInfo>> GetSongInfoList() {
+        return GetInfoList<SongInfo>("/song_list");
+    }
+
+    public static Task<InfoList<DanceInfo>> GetDanceInfoList() {
+        return GetInfoList<DanceInfo>("/dance_list");
+    }
+    
     [Serializable]
     public class DanceInfo {
         public int code;
