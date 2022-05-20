@@ -113,6 +113,7 @@ GameObject:
   - component: {fileID: 6310290736264158968}
   - component: {fileID: 6310290736264158971}
   - component: {fileID: 1811747214498918850}
+  - component: {fileID: 3283905685853923784}
   m_Layer: 5
   m_Name: MenuDanceEntry
   m_TagString: Untagged
@@ -199,6 +200,20 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &3283905685853923784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6310290736264158973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 911cc86e0d1b3324d9b3efe068c218d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selected: 0
+  alphaDiff: 0.2
 --- !u!1 &6310290737075800624
 GameObject:
   m_ObjectHideFlags: 0

@@ -853,8 +853,9 @@ GameObject:
   - component: {fileID: 1194005795}
   - component: {fileID: 1194005798}
   - component: {fileID: 1194005799}
+  - component: {fileID: 1194005800}
   m_Layer: 5
-  m_Name: ScrollBack
+  m_Name: MenuDanceList
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -975,6 +976,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Padding: {x: 0, y: 0, z: 0, w: 0}
   m_Softness: {x: 0, y: 0}
+--- !u!114 &1194005800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194005793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 540e3008152c652479123a2505e7b6b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entriesContainer: {fileID: 818106442}
+  selected: 0
+  alphaDiff: 0.2
 --- !u!224 &1275184309 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6310290736264158970, guid: 669b1818a0520b84ca3a837f2d5f0743, type: 3}
