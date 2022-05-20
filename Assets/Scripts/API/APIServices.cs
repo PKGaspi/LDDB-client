@@ -34,6 +34,30 @@ public static class APIServices
         }
         return default;
     }
+        
+    private static async Task<Byte[]> GetData(String uri) {
+        String url = BASE_URL + uri;
+        try {
+            Debug.Log("GET " + url);
+            using var www = UnityWebRequest.Get(url);
+            //www.SetRequestHeader("application/json", )
+            var operation = www.SendWebRequest();
+
+            while (!operation.isDone)
+                await Task.Yield();
+
+            if (www.result != UnityWebRequest.Result.Success)
+                Debug.LogError($"Failed: {www.error}");
+            
+            Debug.Log("GET " + url + " Result: " + www.downloadHandler.data);
+
+            return www.downloadHandler.data;
+        }
+        catch (Exception e) {
+            Debug.LogError($"{nameof(GetInfo)} failed: {e.Message}");
+        }
+        return default;
+    }
 
     private async static Task<InfoList<T>> GetInfoList<T>(String uri) {
         String url = BASE_URL + uri;
@@ -65,6 +89,11 @@ public static class APIServices
     
     public static Task<DanceInfo> GetDanceInfo(String id) {
         return GetInfo<DanceInfo>($"/dance/{id}/info");
+    }
+
+    public static async Task<String> GetDanceData(String id) {
+        var result = await GetData($"/dance/{id}/data");
+        return System.Text.Encoding.UTF8.GetString(System.Convert.FromBase64String(System.Text.Encoding.UTF8.GetString(result)));
     }
 
     public static Task<InfoList<SongInfo>> GetSongInfoList() {
