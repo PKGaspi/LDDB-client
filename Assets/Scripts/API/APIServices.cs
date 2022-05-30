@@ -11,13 +11,37 @@ public static class APIServices
 {
     private const String BASE_URL = "http://localhost:8000";
     
+    public static async Task<StatusInfo> GetStatus() {
+        String url = BASE_URL + "/status";
+        try {
+            using var www = UnityWebRequest.Get(url);
+            var operation = www.SendWebRequest();
+
+            while (!operation.isDone)
+                await Task.Yield();
+
+            if (www.result != UnityWebRequest.Result.Success) {
+                Debug.LogError($"Failed: {www.error}");
+                StatusInfo status = new StatusInfo();
+                status.code = www.responseCode;
+                status.message = www.error;
+                return status;
+            }
+            
+            Debug.Log("GET " + url + " Result: " + www.downloadHandler.text);
+
+            return JsonUtility.FromJson<StatusInfo>(www.downloadHandler.text);
+        }
+        catch (Exception e) {
+            Debug.LogError($"{nameof(GetStatus)} failed: {e.Message}");
+        }
+        return null;
+    }
     // Source: https://github.com/crevelop/unitywebrequest-tutorial
     private static async Task<T> GetInfo<T>(String uri) {
         String url = BASE_URL + uri;
         try {
-            Debug.Log("GET " + url);
             using var www = UnityWebRequest.Get(url);
-            //www.SetRequestHeader("application/json", )
             var operation = www.SendWebRequest();
 
             while (!operation.isDone)
@@ -39,9 +63,7 @@ public static class APIServices
     private static async Task<Byte[]> GetData(String uri) {
         String url = BASE_URL + uri;
         try {
-            Debug.Log("GET " + url);
             using var www = UnityWebRequest.Get(url);
-            //www.SetRequestHeader("application/json", )
             var operation = www.SendWebRequest();
 
             while (!operation.isDone)
@@ -55,7 +77,7 @@ public static class APIServices
             return www.downloadHandler.data;
         }
         catch (Exception e) {
-            Debug.LogError($"{nameof(GetInfo)} failed: {e.Message}");
+            Debug.LogError($"{nameof(GetData)} failed: {e.Message}");
         }
         return default;
     }
@@ -63,9 +85,7 @@ public static class APIServices
     private async static Task<InfoList<T>> GetInfoList<T>(String uri) {
         String url = BASE_URL + uri;
         try {
-            Debug.Log("GET " + url);
             using var www = UnityWebRequest.Get(url);
-            //www.SetRequestHeader("application/json", )
             var operation = www.SendWebRequest();
 
             while (!operation.isDone)
@@ -79,7 +99,7 @@ public static class APIServices
             return JsonUtility.FromJson<InfoList<T>>(www.downloadHandler.text);
         }
         catch (Exception e) {
-            Debug.LogError($"{nameof(GetInfo)} failed: {e.Message}");
+            Debug.LogError($"{nameof(GetInfoList)} failed: {e.Message}");
         }
         return default;
     }
@@ -107,6 +127,12 @@ public static class APIServices
 }
 
 namespace APITypes {
+    [Serializable]
+    public class StatusInfo {
+        public long code;
+        public String message;
+    }
+
     [Serializable]
     public class DanceInfo {
         public int code;
