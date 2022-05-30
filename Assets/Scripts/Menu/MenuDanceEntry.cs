@@ -26,7 +26,10 @@ public class MenuDanceEntry : MenuEntry
     }
 
     new void Activate() {
-        SceneManager.LoadScene("Scenes/DancePlayer");
+        GameObject go = new GameObject();
+        DanceDownloader danceDownloader = go.AddComponent(typeof(DanceDownloader)) as DanceDownloader;
+        danceDownloader.danceInfo = dance;
+        danceDownloader.Play();
     }
 
     public void SetDance(DanceInfo dance) {

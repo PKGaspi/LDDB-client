@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -11,7 +12,7 @@ public class DancePlayer : MonoBehaviour
     private float timestamp = 0f;
     private int score = 0;
     private AudioSource songSource;
-    private string danceFileFolder = "Dances";
+    private const string DANCES_PATH = "Dances";
     private DanceData.DanceData dance;
     private int currentMoveIndex = 0;
     private bool scorable = true;
@@ -21,35 +22,16 @@ public class DancePlayer : MonoBehaviour
     public bool autoplay = false;
     private bool playing = false;
     public bool mute = false;
+    public float playDelay = 1f;
 
     // Start is called before the first frame update
-    async void Start()
-    {  
-        if (danceFileName == null) {
-            return;
-        }
-
+    void Start() {
         songSource = gameObject.GetComponent(typeof(AudioSource)) as AudioSource;
-        dance = DanceParser.Parse(Path.Combine(Application.dataPath, danceFileFolder, danceFileName)); 
-        dance.danceName = "Super chachi dance";
-        dance.creator = "El gran, único e inigualable Gaspi";
-        
-        // Debug
-        dance.LogInfo();
-        dance.LogMoveInfo(0);
-        dance.LogMoveInfo(1);
-        dance.LogMoveInfo(2);
-        
-        songSource.clip = await LoadClip(Path.Combine(Application.dataPath, danceFileFolder, dance.songFilePath));
 
-        foreach (MoveData move in dance.moves) {
-            danceUI.LoadMove(move);
+        if (autoplay) {
+            Setup();
+            Invoke("Play", playDelay);
         }
-
-        songSource.mute = mute;
-
-        if (autoplay)
-            Play();
     }
 
     // Update is called once per frame
@@ -81,11 +63,29 @@ public class DancePlayer : MonoBehaviour
 
     }
 
+    public async void Setup() {
+        if (danceFileName == null) {
+            return;
+        }
+
+        dance = DanceParser.Parse(Path.Combine(Application.dataPath, DANCES_PATH, danceFileName)); 
+        dance.danceName = "Super chachi dance";
+        dance.creator = "El gran, único e inigualable Gaspi";
+
+        
+        songSource.clip = await LoadClip(Path.Combine(Application.dataPath, DANCES_PATH, dance.songFilePath));
+        songSource.mute = mute;
+
+        foreach (MoveData move in dance.moves) {
+            danceUI.LoadMove(move);
+        }
+
+    }
+
     public void Play() {
         playing = true;
         songSource.Play();
         danceUI.gestureIconsBar.playing = true;
-
     }
 
     public void Stop() {
