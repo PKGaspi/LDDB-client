@@ -7,6 +7,7 @@ public class MenuEntry : MonoBehaviour
 {
     public bool selected = false;
     public float alphaDiff = .2f;
+    public Text mainText;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +32,10 @@ public class MenuEntry : MonoBehaviour
             return;
         selected = false;
         ModifyAlpha(GetComponent<Image>(), -alphaDiff);
+    }
+
+    public void Activate() {
+        Debug.Log("Activated entry " + mainText.text);
     }
 
     
