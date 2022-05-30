@@ -13,7 +13,7 @@ public class MenuList : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        entriesContainer.GetChild(selected).GetComponent<MenuEntry>().Select();
+        // entriesContainer.GetChild(selected).GetComponent<MenuEntry>().Select();
     }
 
     // Update is called once per frame

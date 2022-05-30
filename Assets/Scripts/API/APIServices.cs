@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using APITypes;
 
 public static class APIServices
 {
@@ -103,7 +104,9 @@ public static class APIServices
     public static Task<InfoList<DanceInfo>> GetDanceInfoList() {
         return GetInfoList<DanceInfo>("/dance_list");
     }
-    
+}
+
+namespace APITypes {
     [Serializable]
     public class DanceInfo {
         public int code;
@@ -121,7 +124,7 @@ public static class APIServices
         public String id;
         public DateTime created_at;
         public DateTime modified_at;
-        public String name;
+        public String username;
     }
 
     [Serializable]

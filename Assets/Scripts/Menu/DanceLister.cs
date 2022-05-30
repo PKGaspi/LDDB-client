@@ -2,14 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using APITypes;
 
 public class DanceLister : MonoBehaviour
 {
+    public GameObject menuDanceEntryPrefab;
+    public Transform listMenu;
     // Start is called before the first frame update
     async void Start()
     {
-        TestGet();
-        
+        InfoList<DanceInfo> result = await APIServices.GetDanceInfoList();
+        Debug.Log(result.list);
+        Debug.Log(result.list.Count);
+        foreach (DanceInfo dance in result.list) {
+            Debug.Log(dance.song.name);
+            Debug.Log(dance.song.author);
+            Debug.Log(dance.song.author.name);
+            CreateMenuDanceEntry(dance);
+        }
     }
 
     // Update is called once per frame
@@ -18,16 +28,8 @@ public class DanceLister : MonoBehaviour
         
     }
 
-    [ContextMenu("Test Get")]
-    public async void TestGet()
-    {
-        //var result = await APIServices.GetSongInfo("19267ae9-3421-4c0c-a587-0f914c145c8a");
-        //var result = await APIServices.GetSongInfoList();
-        //var result = await APIServices.GetDanceInfo("e289043b-d156-4652-ae63-85f489f66481");
-        var result = await APIServices.GetDanceData("e289043b-d156-4652-ae63-85f489f66481");
-
-        Debug.Log(result);
-        //Debug.Log(result.code);
-
+    private void CreateMenuDanceEntry(DanceInfo dance) {
+        var entry = Instantiate(menuDanceEntryPrefab, listMenu);
+        entry.GetComponent<MenuDanceEntry>().SetDance(dance);
     }
 }

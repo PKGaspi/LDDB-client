@@ -12,7 +12,7 @@ public class DancePlayer : MonoBehaviour
     private int score = 0;
     private AudioSource songSource;
     private string danceFileFolder = "Dances";
-    private DanceData dance;
+    private DanceData.DanceData dance;
     private int currentMoveIndex = 0;
     private bool scorable = true;
     

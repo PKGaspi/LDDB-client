@@ -7,9 +7,9 @@ public static class DanceParser {
 
     public static readonly int[] VALID_FILE_VERSIONS = {1};
 
-    public static DanceData Parse(String danceFilePath) {
+    public static DanceData.DanceData Parse(String danceFilePath) {
         // Create DanceData
-        DanceData dance = new DanceData();
+        DanceData.DanceData dance = new DanceData.DanceData();
         StreamReader reader = File.OpenText(danceFilePath);
         dance.filePath = danceFilePath;
         
