@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/DanceExplorer.unity
+    guid: fd24c459ff9492b4199468c759838842
+  - enabled: 1
+    path: Assets/Scenes/DancePlayer.unity
+    guid: babf062ef84594c45a5bba1899b809bd
   m_configObjects: {}
