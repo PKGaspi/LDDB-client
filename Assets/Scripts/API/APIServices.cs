@@ -117,6 +117,11 @@ public static class APIServices
         return System.Text.Encoding.UTF8.GetString(System.Convert.FromBase64String(System.Text.Encoding.UTF8.GetString(result)));
     }
 
+    public static async Task<byte[]> GetSongData(String id) {
+        var result = await GetData($"/song/{id}/data");
+        return result;
+    }
+
     public static Task<InfoList<SongInfo>> GetSongInfoList() {
         return GetInfoList<SongInfo>("/song_list");
     }

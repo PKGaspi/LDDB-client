@@ -27,6 +27,7 @@ public class MenuDanceEntry : MenuEntry
 
     new void Activate() {
         GameObject go = new GameObject();
+        go.name = "DanceInfo";
         DanceDownloader danceDownloader = go.AddComponent(typeof(DanceDownloader)) as DanceDownloader;
         danceDownloader.danceInfo = dance;
         danceDownloader.Play();

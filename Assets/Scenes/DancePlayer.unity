@@ -476,7 +476,6 @@ GameObject:
   - component: {fileID: 1193331679}
   - component: {fileID: 1193331678}
   - component: {fileID: 1193331680}
-  - component: {fileID: 1193331681}
   m_Layer: 0
   m_Name: DancePlayer
   m_TagString: Untagged
@@ -499,7 +498,8 @@ MonoBehaviour:
   danceUI: {fileID: 867322450}
   danceFileName: dikir-barat_1.dnc
   autoplay: 1
-  mute: 1
+  mute: 0
+  playDelay: 1
 --- !u!4 &1193331679
 Transform:
   m_ObjectHideFlags: 0
@@ -524,7 +524,7 @@ AudioSource:
   m_GameObject: {fileID: 1193331677}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -5741092956545568319, guid: bda4aadd6d964ed46bf0bd5fc9324853, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -611,34 +611,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1193331681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1193331677}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1a6da71d79ff2e42b4d9377fd9596bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  danceInfo:
-    code: 0
-    id: 
-    name: 
-    creator:
-      code: 0
-      id: 
-      username: 
-    song:
-      code: 0
-      id: 
-      name: 
-      author:
-        code: 0
-        id: 
-        name: 
 --- !u!1 &1242833001
 GameObject:
   m_ObjectHideFlags: 0

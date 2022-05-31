@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
+using APITypes;
 
 public class DancePlayer : MonoBehaviour
 {
@@ -27,9 +29,17 @@ public class DancePlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start() {
         songSource = gameObject.GetComponent(typeof(AudioSource)) as AudioSource;
-
+        String songFileName = "";
+        GameObject danceDataGO = GameObject.Find("DanceInfo");
+        if (danceDataGO != null) {
+            // Load data from the go
+            DanceInfo danceInfo = danceDataGO.GetComponent<DanceDownloader>().danceInfo;
+            danceFileName = Path.Combine(danceInfo.id, danceInfo.name + ".dnc");
+            songFileName = Path.Combine(danceInfo.id, $"{danceInfo.song.name} - {danceInfo.song.author.name}.wav");
+            GameObject.Destroy(danceDataGO);
+        }
         if (autoplay) {
-            Setup();
+            Setup(danceFileName, songFileName);
             Invoke("Play", playDelay);
         }
     }
@@ -63,17 +73,17 @@ public class DancePlayer : MonoBehaviour
 
     }
 
-    public async void Setup() {
+    public async void Setup(String danceFileName, String songFileName) {
         if (danceFileName == null) {
             return;
         }
 
-        dance = DanceParser.Parse(Path.Combine(Application.dataPath, DANCES_PATH, danceFileName)); 
+        dance = DanceParser.Parse(Path.Combine(Application.persistentDataPath, DANCES_PATH, danceFileName)); 
         dance.danceName = "Super chachi dance";
         dance.creator = "El gran, único e inigualable Gaspi";
 
         
-        songSource.clip = await LoadClip(Path.Combine(Application.dataPath, DANCES_PATH, dance.songFilePath));
+        songSource.clip = await LoadClip(Path.Combine(Application.persistentDataPath, DANCES_PATH, songFileName));
         songSource.mute = mute;
 
         foreach (MoveData move in dance.moves) {
