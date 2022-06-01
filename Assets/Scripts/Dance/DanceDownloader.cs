@@ -37,9 +37,6 @@ public class DanceDownloader : MonoBehaviour
         await songFile.WriteAsync(songData);
         songFile.Close();
 
-        Debug.Log("Dance: " + File.Exists(danceFilePath));
-        Debug.Log("Song: " + File.Exists(songFilePath));
-
         downloaded = true;
     }
 
