@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DancePlayer.unity
     guid: babf062ef84594c45a5bba1899b809bd
+  - enabled: 1
+    path: Assets/Scenes/TitleScreen.unity
+    guid: 65e2c77df5f4e3c4e8a284de5f323c75
   m_configObjects: {}
