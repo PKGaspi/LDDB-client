@@ -1,13 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class MenuEntry : MonoBehaviour
 {
     public bool selected = false;
     public float alphaDiff = .2f;
     public Text mainText;
+    public UnityEvent activationEvent;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +40,7 @@ public class MenuEntry : MonoBehaviour
 
     public void Activate() {
         Debug.Log("Activated entry " + mainText.text);
+        activationEvent.Invoke();
     }
 
     
@@ -43,5 +48,13 @@ public class MenuEntry : MonoBehaviour
         var color = img.color;
         color.a += ammount;
         img.color = color;
+    }
+
+    public void LoadScene(string scene) {
+        SceneManager.LoadScene(scene);
+    }
+
+    public void QuitGame() {
+        Application.Quit();
     }
 }
