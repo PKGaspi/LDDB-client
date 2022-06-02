@@ -1,7 +1,6 @@
 using UnityEngine;
 
-namespace DanceData {
-
+namespace PlayData {
     public class DanceData {
         public int version;
         public string filePath;

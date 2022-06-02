@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using APITypes;
+using PlayData;
 
 public class DancePlayer : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class DancePlayer : MonoBehaviour
     private int score = 0;
     private AudioSource songSource;
     private const string DANCES_PATH = "Dances";
-    private DanceData.DanceData dance;
+    private DanceData dance;
     private int currentMoveIndex = 0;
     private bool scorable = true;
     
