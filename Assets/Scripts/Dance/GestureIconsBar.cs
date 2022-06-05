@@ -9,6 +9,9 @@ public class GestureIconsBar : MonoBehaviour
     public bool playing = false;
     public float speed = 100f; // Speed at which the icons move from right to left.
     public RectTransform contents;
+    public Color gestureTintColor;
+
+    private const string SPRITE_FOLDER = "Sprites/DanceMoves";
     
     // Start is called before the first frame update
     void Start()
@@ -29,13 +32,16 @@ public class GestureIconsBar : MonoBehaviour
     
     // Receives MoveData move and loads the needed info into the game scene.
     public void LoadMove(MoveData move) {
-        // TODO: look for this gesture image (somewhere?)
-        // TODO: Create a UI image gameobject
+        // Look for this gesture image.
+        Sprite gestureSprite = Resources.Load<Sprite>($"{SPRITE_FOLDER}/{move.gestureName}");
+        // Create a UI image gameobject.
         GameObject gestureIcon = new GameObject();
         Image gestureImage = gestureIcon.AddComponent<Image>();
-        // Add gameobject to contents
+        gestureImage.sprite = gestureSprite;
+        gestureImage.color = gestureTintColor;
+        // Add gameobject to contents.
         gestureIcon.transform.SetParent(contents);
-        // TODO: Calculate image postion based on the speed and on move.startTime
+        // Calculate image postion based on the speed and on move.startTime.
         ((RectTransform) gestureIcon.transform).localPosition = new Vector2(speed * move.startTime, 0);
         // Maybe do the same for move.endTime ???
     }
