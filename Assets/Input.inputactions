@@ -1,5 +1,5 @@
 {
-    "name": "a bailar",
+    "name": "Input",
     "maps": [
         {
             "name": "Player",
@@ -767,6 +767,34 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "TrackedDeviceOrientation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "MISC",
+            "id": "8e3ff04b-fd3c-4cec-bc97-8d962867a54c",
+            "actions": [
+                {
+                    "name": "Take screenshot",
+                    "type": "Button",
+                    "id": "d70893de-a405-45be-9d17-5edc8839ca0e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "398b07bb-a67b-40ea-9d81-996d51bcdbb5",
+                    "path": "<Keyboard>/f12",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Take screenshot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

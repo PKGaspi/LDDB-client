@@ -43,6 +43,7 @@ public class GestureIconsBar : MonoBehaviour
         gestureIcon.transform.SetParent(contents);
         // Calculate image postion based on the speed and on move.startTime.
         ((RectTransform) gestureIcon.transform).localPosition = new Vector2(speed * move.startTime, 0);
+        gestureIcon.transform.localScale = Vector3.one;
         // Maybe do the same for move.endTime ???
     }
 }
