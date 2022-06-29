@@ -40,10 +40,10 @@ public class DancePlayer : MonoBehaviour
             songFileName = Path.Combine(danceInfo.id, $"{danceInfo.song.name} - {danceInfo.song.author.name}.wav");
             GameObject.Destroy(danceDataGO);
         }
-        if (autoplay) {
-            Setup(danceFileName, songFileName);
-            Invoke("Play", playDelay);
-        }
+        //if (autoplay) {
+        Setup(danceFileName, songFileName);
+            //Invoke("Play", playDelay);
+        //}
     }
 
     // Update is called once per frame
