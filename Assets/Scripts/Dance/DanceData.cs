@@ -11,6 +11,13 @@ namespace PlayData {
         public float duration;
         public MoveData[] moves;
 
+        public int MaxScore() {
+            int maxScore = 0;
+            foreach (MoveData move in moves) {
+                maxScore += move.points;
+            }
+            return maxScore;
+        }
         public void LogInfo() {
             Debug.Log("File version - " + version);
             Debug.Log("Name - " + danceName);

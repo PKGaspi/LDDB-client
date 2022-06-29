@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine.SceneManagement;
 using APITypes;
 using PlayData;
 
@@ -17,6 +16,7 @@ public class DancePlayer : MonoBehaviour
     private AudioSource songSource;
     private const string DANCES_PATH = "Dances";
     private DanceData dance;
+    private DanceInfo danceInfo;
     private int currentMoveIndex = 0;
     private bool scorable = true;
     
@@ -26,6 +26,7 @@ public class DancePlayer : MonoBehaviour
     private bool playing = false;
     public bool mute = false;
     public float playDelay = 1f;
+    public float endDelay = 2f;
 
     // Start is called before the first frame update
     void Start() {
@@ -34,7 +35,7 @@ public class DancePlayer : MonoBehaviour
         GameObject danceDataGO = GameObject.Find("DanceInfo");
         if (danceDataGO != null) {
             // Load data from the go
-            DanceInfo danceInfo = danceDataGO.GetComponent<DanceDownloader>().danceInfo;
+            danceInfo = danceDataGO.GetComponent<DanceDownloader>().danceInfo;
             danceFileName = Path.Combine(danceInfo.id, danceInfo.name + ".dnc");
             songFileName = Path.Combine(danceInfo.id, $"{danceInfo.song.name} - {danceInfo.song.author.name}.wav");
             GameObject.Destroy(danceDataGO);
@@ -57,7 +58,9 @@ public class DancePlayer : MonoBehaviour
         if (timestamp >= dance.duration) {
             Stop();
             timestamp = dance.duration;
+            // TODO: Play End animation
             // TODO: Change to results scene
+            Invoke("End", endDelay);
         }
 
         if (currentMoveIndex < dance.moves.Length) {
@@ -80,8 +83,10 @@ public class DancePlayer : MonoBehaviour
         }
 
         dance = DanceParser.Parse(Path.Combine(Application.persistentDataPath, DANCES_PATH, danceFileName)); 
-        dance.danceName = "Super chachi dance";
-        dance.creator = "El gran, único e inigualable Gaspi";
+        if (danceInfo != null) {
+            dance.danceName = danceInfo.name;
+            dance.creator = danceInfo.creator.username;
+        }
 
         
         songSource.clip = await LoadClip(Path.Combine(Application.persistentDataPath, DANCES_PATH, songFileName));
@@ -110,6 +115,19 @@ public class DancePlayer : MonoBehaviour
             return;
         score += dance.moves[currentMoveIndex].points;
         scorable = false;
+    }
+
+    public void End() {
+        // Create results asset to carry to next screen.
+        Debug.Log("Dance End");
+        GameObject go = new GameObject();
+        go.name = "DanceSummary";
+        DanceSummary danceSummary = go.AddComponent(typeof(DanceSummary)) as DanceSummary;
+        danceSummary.dance = dance;
+        danceSummary.songName = danceInfo.song.author.name;
+        danceSummary.songAuthor = danceInfo.song.name;
+        danceSummary.score = score;
+        danceSummary.Show();
     }
 
     // Source: https://answers.unity.com/questions/1518536/load-audioclip-from-folder-on-computer-into-game-i.html
