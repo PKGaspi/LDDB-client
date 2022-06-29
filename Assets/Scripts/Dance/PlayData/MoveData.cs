@@ -11,6 +11,7 @@ namespace PlayData {
         
         public void LogInfo() {
             Debug.Log("Move " + index + " name - " + gestureName);
+            Debug.Log("Move " + index + " gesture - " + gesture);
             Debug.Log("Move " + index + " start - " + startTime);
             Debug.Log("Move " + index + " end - " + endTime);
             Debug.Log("Move " + index + " points - " + points);

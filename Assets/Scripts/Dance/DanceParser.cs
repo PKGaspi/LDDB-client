@@ -43,7 +43,7 @@ public static class DanceParser {
     private static MoveData[] ParseMoves(int version, StreamReader reader) {
         List<MoveData> moves = new List<MoveData>();
         switch (version) {
-            case 1:
+            case 1: // Same as v2
             case 2:
                 // Parse list of moves
                 int moveIndex = 0;
@@ -64,6 +64,7 @@ public static class DanceParser {
                     int movePoints = int.Parse(reader.ReadLine());
                     // Empty line
                     reader.ReadLine();
+                    
 
                     MoveData move = new MoveData();
                     move.index = moveIndex;
@@ -71,6 +72,7 @@ public static class DanceParser {
                     move.endTime = endTime;
                     move.gestureName = gestureName;
                     move.points = movePoints;
+                    Enum.TryParse(gestureName, out move.gesture);
                     moves.Add(move);
                     moveIndex++;
                 }

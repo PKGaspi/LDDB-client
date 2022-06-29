@@ -54,7 +54,11 @@ public class KinectGestures
 		Squat,
 		Push,
 		Pull,
-		Clap
+		Clap,
+		RightArmLeft,
+		LeftArmRightDouble,
+		SwipeLeftDouble,
+		SwipeRightDouble
 	}
 	
 	
