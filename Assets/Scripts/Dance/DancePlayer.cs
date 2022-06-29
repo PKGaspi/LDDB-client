@@ -19,6 +19,7 @@ public class DancePlayer : MonoBehaviour
     private DanceInfo danceInfo;
     private int currentMoveIndex = 0;
     private bool scorable = true;
+    private Random rnd = new Random();
     
     public DanceUI danceUI;
     public string danceFileName;
@@ -89,7 +90,6 @@ public class DancePlayer : MonoBehaviour
         foreach (MoveData move in dance.moves) {
             danceUI.LoadMove(move);
         }
-        dance.LogMoveInfo(2);
     }
 
     public void Play() {
@@ -121,9 +121,11 @@ public class DancePlayer : MonoBehaviour
         if (!scorable)
             return;
         
-
-        score += dance.moves[currentMoveIndex].points;
-        scorable = false;
+        if (gesture == dance.moves[currentMoveIndex].gesture) {
+            int noise = dance.moves[currentMoveIndex].points / 10;
+            score += rng.Next(dance.moves[currentMoveIndex].points - noise, dance.moves[currentMoveIndex].points);
+            scorable = false;
+        }
     }
 
     // Source: https://answers.unity.com/questions/1518536/load-audioclip-from-folder-on-computer-into-game-i.html
