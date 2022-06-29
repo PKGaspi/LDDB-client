@@ -22,16 +22,13 @@ public class DancePlayer : MonoBehaviour
     
     public DanceUI danceUI;
     public string danceFileName;
-    public bool autoplay = false;
+    public string songFileName;
     private bool playing = false;
-    public bool mute = false;
-    public float playDelay = 1f;
     public float endDelay = 2f;
 
     // Start is called before the first frame update
     void Start() {
         songSource = gameObject.GetComponent(typeof(AudioSource)) as AudioSource;
-        String songFileName = "";
         GameObject danceDataGO = GameObject.Find("DanceInfo");
         if (danceDataGO != null) {
             // Load data from the go
@@ -40,10 +37,8 @@ public class DancePlayer : MonoBehaviour
             songFileName = Path.Combine(danceInfo.id, $"{danceInfo.song.name} - {danceInfo.song.author.name}.wav");
             GameObject.Destroy(danceDataGO);
         }
-        //if (autoplay) {
+
         Setup(danceFileName, songFileName);
-            //Invoke("Play", playDelay);
-        //}
     }
 
     // Update is called once per frame
@@ -90,7 +85,6 @@ public class DancePlayer : MonoBehaviour
 
         
         songSource.clip = await LoadClip(Path.Combine(Application.persistentDataPath, DANCES_PATH, songFileName));
-        songSource.mute = mute;
 
         foreach (MoveData move in dance.moves) {
             danceUI.LoadMove(move);
