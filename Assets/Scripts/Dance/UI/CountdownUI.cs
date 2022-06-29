@@ -8,16 +8,20 @@ public class CountdownUI : MonoBehaviour
 {
     public int countFrom = 3;
     public string ceroText = "Dance!";
+    public string initialText = "Calibrating...";
     public Text countText;
     public UnityEvent countFinishEvent;
+    public int maxRuns = 1;
+    private int nRuns = 0;
     private float timer;
     private int counter;
     private bool counting = false;
 
+
     // Start is called before the first frame update
     void Start()
     {
-        countText.text = "";
+        countText.text = initialText;
     }
 
     // Update is called once per frame
@@ -43,9 +47,12 @@ public class CountdownUI : MonoBehaviour
     }
 
     public void StartCounter() {
-        counter = countFrom;
-        timer = countFrom + 1;
-        countText.text = counter.ToString();
-        counting = true;
+        if (nRuns < maxRuns) {
+            nRuns++;   
+            counter = countFrom;
+            timer = countFrom + 1;
+            countText.text = counter.ToString();
+            counting = true;
+        }
     }
 }
