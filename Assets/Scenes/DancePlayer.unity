@@ -674,11 +674,11 @@ MonoBehaviour:
   Player2Avatars: []
   Player1CalibrationPose: 0
   Player2CalibrationPose: 0
-  Player1Gestures: 15000000
+  Player1Gestures: 
   Player2Gestures: 
   MinTimeBetweenGestures: 0.7
   GestureListeners:
-  - {fileID: 0}
+  - {fileID: 1193331678}
   CalibrationText: {fileID: 0}
   HandCursor1: {fileID: 0}
   HandCursor2: {fileID: 0}
@@ -991,6 +991,7 @@ MonoBehaviour:
   danceFileName: test_dance.dnc
   songFileName: test_song.wav
   endDelay: 2
+  countdownUI: {fileID: 1149256550}
 --- !u!4 &1193331679
 Transform:
   m_ObjectHideFlags: 0

@@ -9,7 +9,7 @@ using UnityEngine.Networking;
 using APITypes;
 using PlayData;
 
-public class DancePlayer : MonoBehaviour
+public class DancePlayer : MonoBehaviour, KinectGestures.GestureListenerInterface
 {
     private float timestamp = 0f;
     private int score = 0;
@@ -25,6 +25,7 @@ public class DancePlayer : MonoBehaviour
     public string songFileName;
     private bool playing = false;
     public float endDelay = 2f;
+    public CountdownUI countdownUI;
 
     // Start is called before the first frame update
     void Start() {
@@ -67,8 +68,7 @@ public class DancePlayer : MonoBehaviour
         }
         
         danceUI.SetTime(timestamp);
-        danceUI.SetScore(score);
-        danceUI.SetMoveIndex(currentMoveIndex);
+        //danceUI.SetMoveIndex(currentMoveIndex);
 
     }
 
@@ -92,14 +92,22 @@ public class DancePlayer : MonoBehaviour
     }
 
     public void Play() {
-        playing = true;
         songSource.Play();
+        playing = true;
         danceUI.gestureIconsBar.playing = true;
     }
 
-    public void Stop() {
+    public void Pause() {
+        songSource.Pause();
         playing = false;
+        danceUI.gestureIconsBar.playing = false;
+        // Reset countdown
+        countdownUI.Reset();
+    }
+
+    public void Stop() {
         songSource.Stop();
+        playing = false;
         danceUI.gestureIconsBar.playing = false;
     }
 
@@ -116,17 +124,53 @@ public class DancePlayer : MonoBehaviour
         danceSummary.Show();
     }
 
-    public void OnGestureComplete(KinectGestures.Gestures gesture) {
+    public void UserDetected(uint userId, int userIndex)
+	{
+		// Register every gesture in this dance.
+		KinectManager manager = KinectManager.Instance;
+
+        foreach (MoveData move in dance.moves) {
+		    manager.DetectGesture(userId, move.gesture);
+        }
+
+	}
+	
+	public void UserLost(uint userId, int userIndex)
+	{
+        Pause();
+	}
+
+	public void GestureInProgress(uint userId, int userIndex, KinectGestures.Gestures gesture, 
+	                              float progress, KinectWrapper.NuiSkeletonPositionIndex joint, Vector3 screenPos)
+	{
+
+	}
+
+	public bool GestureCompleted (uint userId, int userIndex, KinectGestures.Gestures gesture, 
+	                              KinectWrapper.NuiSkeletonPositionIndex joint, Vector3 screenPos)
+	{
         if (!scorable)
-            return;
+            return false;
         
         if (gesture == dance.moves[currentMoveIndex].gesture) {
             int noise = dance.moves[currentMoveIndex].points / 10;
             score += UnityEngine.Random.Range(dance.moves[currentMoveIndex].points - noise, dance.moves[currentMoveIndex].points);
+            danceUI.SetScore(score);
             scorable = false;
+            return true;
         }
-    }
+        return false;
+	}
 
+	public bool GestureCancelled (uint userId, int userIndex, KinectGestures.Gestures gesture, 
+	                              KinectWrapper.NuiSkeletonPositionIndex joint)
+	{
+		if (gesture == KinectGestures.Gestures.Clap) {
+			print("clap cancelled");
+		}
+		return true;
+	}
+	
     // Source: https://answers.unity.com/questions/1518536/load-audioclip-from-folder-on-computer-into-game-i.html
     async Task<AudioClip> LoadClip(string path)
     {

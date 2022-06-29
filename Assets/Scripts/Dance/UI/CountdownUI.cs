@@ -21,7 +21,7 @@ public class CountdownUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        countText.text = initialText;
+        Reset();
     }
 
     // Update is called once per frame
@@ -54,5 +54,11 @@ public class CountdownUI : MonoBehaviour
             countText.text = counter.ToString();
             counting = true;
         }
+    }
+
+    public void Reset() {
+        nRuns = 0;
+        countText.text = initialText;
+        counting = false;
     }
 }
