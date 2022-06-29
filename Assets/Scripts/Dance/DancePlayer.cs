@@ -89,6 +89,9 @@ public class DancePlayer : MonoBehaviour, KinectGestures.GestureListenerInterfac
         foreach (MoveData move in dance.moves) {
             danceUI.LoadMove(move);
         }
+    
+        danceUI.SetTime(timestamp);
+        danceUI.SetScore(score);
     }
 
     public void Play() {
