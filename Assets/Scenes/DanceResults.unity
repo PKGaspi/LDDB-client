@@ -254,13 +254,17 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6603048732583489347, guid: ca4788ae75c149749bdd1b1dc7097c58, type: 3}
+      propertyPath: m_Name
+      value: ExitText
+      objectReference: {fileID: 0}
     - target: {fileID: 7057820186047563507, guid: ca4788ae75c149749bdd1b1dc7097c58, type: 3}
       propertyPath: activationEvent.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7057820186047563507, guid: ca4788ae75c149749bdd1b1dc7097c58, type: 3}
       propertyPath: activationEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7057820186047563507, guid: ca4788ae75c149749bdd1b1dc7097c58, type: 3}
       propertyPath: activationEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -272,7 +276,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7057820186047563507, guid: ca4788ae75c149749bdd1b1dc7097c58, type: 3}
       propertyPath: activationEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: QuitGame
+      value: LoadScene
       objectReference: {fileID: 0}
     - target: {fileID: 7057820186047563507, guid: ca4788ae75c149749bdd1b1dc7097c58, type: 3}
       propertyPath: activationEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -280,7 +284,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7057820186047563507, guid: ca4788ae75c149749bdd1b1dc7097c58, type: 3}
       propertyPath: activationEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: DanceExplorer
+      value: TitleScreen
       objectReference: {fileID: 0}
     - target: {fileID: 7057820186047563507, guid: ca4788ae75c149749bdd1b1dc7097c58, type: 3}
       propertyPath: activationEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
