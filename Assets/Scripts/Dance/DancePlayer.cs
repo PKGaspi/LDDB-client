@@ -19,7 +19,6 @@ public class DancePlayer : MonoBehaviour
     private DanceInfo danceInfo;
     private int currentMoveIndex = 0;
     private bool scorable = true;
-    private Random rnd = new Random();
     
     public DanceUI danceUI;
     public string danceFileName;
@@ -123,7 +122,7 @@ public class DancePlayer : MonoBehaviour
         
         if (gesture == dance.moves[currentMoveIndex].gesture) {
             int noise = dance.moves[currentMoveIndex].points / 10;
-            score += rng.Next(dance.moves[currentMoveIndex].points - noise, dance.moves[currentMoveIndex].points);
+            score += UnityEngine.Random.Range(dance.moves[currentMoveIndex].points - noise, dance.moves[currentMoveIndex].points);
             scorable = false;
         }
     }

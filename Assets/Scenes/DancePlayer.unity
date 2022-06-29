@@ -846,6 +846,14 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: d70893de-a405-45be-9d17-5edc8839ca0e
     m_ActionName: MISC/Take screenshot[/Keyboard/f12]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 658b894f-6483-4eac-af4e-48b905c27e52
+    m_ActionName: UI/Pause[/Keyboard/p]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 875a5dde-96f1-40d7-9ffa-fed8498ce2bc
+    m_ActionName: UI/DEBUG End[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: MISC
@@ -980,10 +988,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   danceUI: {fileID: 867322450}
-  danceFileName: dikir-barat_1.dnc
-  autoplay: 1
-  mute: 0
-  playDelay: 1
+  danceFileName: test_dance.dnc
+  songFileName: test_song.wav
   endDelay: 2
 --- !u!4 &1193331679
 Transform:
@@ -993,7 +999,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1193331677}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -75.18623, y: 273.58572, z: -116.32439}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
