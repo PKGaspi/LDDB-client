@@ -18,14 +18,22 @@ public static class DanceParser {
 
         switch (version) {
             case 1: 
+                // Header
                 dance.songFilePath = reader.ReadLine();
                 dance.duration = float.Parse(reader.ReadLine());
-
                 reader.ReadLine(); // Empty line
                 
+                // Moves List
                 dance.moves = ParseMoves(version, reader);
                 break;
             case 2:
+                // Header
+                dance.duration = float.Parse(reader.ReadLine());
+                dance.songOffset = float.Parse(reader.ReadLine());
+                reader.ReadLine(); // Empty line
+                
+                // Moves List
+                dance.moves = ParseMoves(version, reader);
                 break;
             default: return null;
         }

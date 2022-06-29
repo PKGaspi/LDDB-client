@@ -8,6 +8,7 @@ namespace PlayData {
         public string author;
         public string creator;
         public string songFilePath;
+        public float songOffset;
         public float duration;
         public MoveData[] moves;
 
