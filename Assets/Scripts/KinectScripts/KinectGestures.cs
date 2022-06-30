@@ -543,7 +543,7 @@ public class KinectGestures
 				break;
 
 			// check for SwipeLeft
-			case Gestures.SwipeLeft:
+			case Gestures.SwipeLeft: // TODO: check
 				switch(gestureData.state)
 				{
 					case 0:  // gesture detection - phase 1
@@ -597,7 +597,7 @@ public class KinectGestures
 				break;
 
 			// check for SwipeRight
-			case Gestures.SwipeRight:
+			case Gestures.SwipeRight: // TODO: Check
 				switch(gestureData.state)
 				{
 					case 0:  // gesture detection - phase 1
@@ -1139,6 +1139,46 @@ public class KinectGestures
 						else {
 							SetGestureCancelled(ref gestureData);
 						}
+						break;
+				}
+				break;
+			case Gestures.RightArmLeft:
+				switch (gestureData.state) {
+					case 0:
+
+						break;
+					case 1:
+
+						break;
+				}
+				break;
+			case Gestures.LeftArmRightDouble:
+				switch (gestureData.state) {
+					case 0:
+
+						break;
+					case 1:
+
+						break;
+				}
+				break;
+			case Gestures.SwipeLeftDouble:
+				switch (gestureData.state) {
+					case 0:
+
+						break;
+					case 1:
+
+						break;
+				}
+				break;
+			case Gestures.SwipeRightDouble:
+				switch (gestureData.state) {
+					case 0:
+
+						break;
+					case 1:
+
 						break;
 				}
 				break;
