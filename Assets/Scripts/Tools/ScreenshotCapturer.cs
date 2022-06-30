@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 
 public class ScreenshotCapturer : MonoBehaviour
@@ -19,7 +20,11 @@ public class ScreenshotCapturer : MonoBehaviour
         
     }
 
-    public void Capture() {
+    public void Capture(InputAction.CallbackContext context) {
+        if (!context.performed) {
+            return;
+        }
+
         String filename = $"Let's Dance! Dikir Barat - {DateTime.Now.ToString("dd-MM-yyyy_hh-mm-ss")}.png";
         ScreenCapture.CaptureScreenshot(filename, 2);
         Debug.Log($"Captured screenshot {filename}");

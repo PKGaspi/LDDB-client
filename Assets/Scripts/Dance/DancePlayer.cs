@@ -26,6 +26,7 @@ public class DancePlayer : MonoBehaviour, KinectGestures.GestureListenerInterfac
     private bool playing = false;
     public float endDelay = 2f;
     public CountdownUI countdownUI;
+    public ParticleSystem[] endParticles;
 
     // Start is called before the first frame update
     void Start() {
@@ -52,11 +53,7 @@ public class DancePlayer : MonoBehaviour, KinectGestures.GestureListenerInterfac
         timestamp += Time.deltaTime;
 
         if (timestamp >= dance.duration) {
-            Stop();
-            timestamp = dance.duration;
-            // TODO: Play End animation
-            // TODO: Change to results scene
-            Invoke("End", endDelay);
+            End();
         }
 
         if (currentMoveIndex < dance.moves.Length) {
@@ -115,16 +112,28 @@ public class DancePlayer : MonoBehaviour, KinectGestures.GestureListenerInterfac
     }
 
     public void End() {
-        // Create results asset to carry to next screen.
         Debug.Log("Dance End");
+        
+        // Stop dance
+        timestamp = dance.duration;
+        Stop();
+        // Celebrate~!
+        foreach (ParticleSystem particles in endParticles)
+        {
+            particles.Play();
+        }
+        // Transition to results screen.
+        // Create results asset to carry to next screen.
         GameObject go = new GameObject();
         go.name = "DanceSummary";
         DanceSummary danceSummary = go.AddComponent(typeof(DanceSummary)) as DanceSummary;
         danceSummary.dance = dance;
-        danceSummary.songName = danceInfo.song.author.name;
-        danceSummary.songAuthor = danceInfo.song.name;
+        if (danceInfo != null) {
+            danceSummary.songName = danceInfo.song.author.name;
+            danceSummary.songAuthor = danceInfo.song.name;
+        }
         danceSummary.score = score;
-        danceSummary.Show();
+        danceSummary.Invoke("Show", endDelay);
     }
 
     public void UserDetected(uint userId, int userIndex)

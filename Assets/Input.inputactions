@@ -358,15 +358,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "DEBUG End",
-                    "type": "Button",
-                    "id": "875a5dde-96f1-40d7-9ffa-fed8498ce2bc",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -798,17 +789,6 @@
                     "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "3b6f03f5-3841-499c-aadf-2cb9854352aa",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "DEBUG End",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         },
@@ -835,6 +815,34 @@
                     "processors": "",
                     "groups": "",
                     "action": "Take screenshot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Debug",
+            "id": "8e3492dc-9828-4525-9662-cb21e702dfea",
+            "actions": [
+                {
+                    "name": "End Dance",
+                    "type": "Button",
+                    "id": "bf716018-14f2-49df-b527-dc5981ad3b32",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "baa911a3-d6a0-4be9-897f-acc386a53c16",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "End Dance",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
