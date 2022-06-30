@@ -45,4 +45,10 @@ public class DanceLister : MonoBehaviour
         var entry = Instantiate(menuDanceEntryPrefab, menuScrollRect.content);
         entry.GetComponent<MenuDanceEntry>().SetDance(dance);
     }
+
+    
+    public void ShowMessage(string msg) {
+        menuScrollRect.transform.parent.gameObject.SetActive(false);
+        messageText.text = msg;
+    }
 }
