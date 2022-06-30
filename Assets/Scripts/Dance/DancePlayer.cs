@@ -27,6 +27,7 @@ public class DancePlayer : MonoBehaviour, KinectGestures.GestureListenerInterfac
     public float endDelay = 2f;
     public CountdownUI countdownUI;
     public ParticleSystem[] endParticles;
+    public AudioSource[] endSounds;
 
     // Start is called before the first frame update
     void Start() {
@@ -121,6 +122,10 @@ public class DancePlayer : MonoBehaviour, KinectGestures.GestureListenerInterfac
         foreach (ParticleSystem particles in endParticles)
         {
             particles.Play();
+        }
+        foreach (AudioSource source in endSounds)
+        {
+            source.Play();
         }
         // Transition to results screen.
         // Create results asset to carry to next screen.
