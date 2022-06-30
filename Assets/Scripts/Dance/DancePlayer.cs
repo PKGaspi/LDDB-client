@@ -138,6 +138,7 @@ public class DancePlayer : MonoBehaviour, KinectGestures.GestureListenerInterfac
 
     public void UserDetected(uint userId, int userIndex)
 	{
+        countdownUI.StartCounter();
 		// Register every gesture in this dance.
 		KinectManager manager = KinectManager.Instance;
 

@@ -26,9 +26,6 @@ public class AvatarController : MonoBehaviour
 	
 	// Whether the offset node must be repositioned to the user's coordinates, as reported by the sensor or not.
 	public bool offsetRelativeToSensor = false;
-
-	// Events to call when sucessfully calibrated
-    public UnityEvent calibrationEvents;
 	
 
 	// The body root node
@@ -174,7 +171,6 @@ public class AvatarController : MonoBehaviour
 	// Invoked on the successful calibration of a player.
 	public void SuccessfulCalibration(uint userId)
 	{
-		Debug.Log($"Calibrated user {userId}");
 		// reset the models position
 		if(offsetNode != null)
 		{
@@ -183,9 +179,6 @@ public class AvatarController : MonoBehaviour
 		
 		// re-calibrate the position offset
 		offsetCalibrated = false;
-
-		// Invoke calibration methods.
-        calibrationEvents.Invoke();
 	}
 	
 	// Apply the rotations tracked by kinect to the joints.
