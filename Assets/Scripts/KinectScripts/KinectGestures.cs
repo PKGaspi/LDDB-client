@@ -1143,13 +1143,26 @@ public class KinectGestures
 				}
 				break;
 			case Gestures.RightArmLeft:
-				switch (gestureData.state) {
-					case 0:
-
+				switch(gestureData.state)
+				{
+					case 0:  // gesture detection - phase 1
+//						if(jointsTracked[leftHandIndex] && jointsTracked[leftElbowIndex] &&
+//					            (jointsPos[leftHandIndex].y - jointsPos[leftElbowIndex].y) > -0.05f &&
+//					            (jointsPos[leftHandIndex].x - jointsPos[leftElbowIndex].x) < 0f)
+//						{
+//							SetGestureJoint(ref gestureData, timestamp, leftHandIndex, jointsPos[leftHandIndex]);
+//							gestureData.progress = 0.5f;
+//						}
+						bool isInPose = (jointsTracked[rightHandIndex] && jointsTracked[hipCenterIndex] && jointsTracked[shoulderCenterIndex] && jointsTracked[leftHipIndex] && jointsTracked[rightHipIndex] &&
+				   			jointsPos[rightHandIndex].y >= gestureBottom && jointsPos[rightHandIndex].y <= gestureTop &&
+				   			jointsPos[rightHandIndex].x <= jointsPos[leftShoulderIndex].x);
+							//jointsPos[rightHandIndex].x >= gestureLeft && jointsPos[rightHandIndex].x < gestureRight);
+						
+						//Debug.Log($"wtf {isInPose}");
+						CheckPoseComplete(ref gestureData, timestamp, jointsPos[gestureData.joint], isInPose, 0f);
+						
 						break;
-					case 1:
-
-						break;
+				
 				}
 				break;
 			case Gestures.LeftArmRightDouble:
