@@ -98,6 +98,12 @@ public class DancePlayer : MonoBehaviour, KinectGestures.GestureListenerInterfac
         danceUI.gestureIconsBar.playing = true;
     }
 
+    public void UnPause() {
+        songSource.UnPause();
+        playing = true;
+        danceUI.gestureIconsBar.playing = true;
+    }
+
     public void Pause() {
         songSource.Pause();
         playing = false;
@@ -167,15 +173,13 @@ public class DancePlayer : MonoBehaviour, KinectGestures.GestureListenerInterfac
 	public bool GestureCompleted (uint userId, int userIndex, KinectGestures.Gestures gesture, 
 	                              KinectWrapper.NuiSkeletonPositionIndex joint, Vector3 screenPos)
 	{
-        if (!scorable)
-            return false;
-        
-        if (gesture == dance.moves[currentMoveIndex].gesture) {
+        if (scorable && gesture == dance.moves[currentMoveIndex].gesture) {
             int noise = dance.moves[currentMoveIndex].points / 10;
-            score += UnityEngine.Random.Range(dance.moves[currentMoveIndex].points - noise, dance.moves[currentMoveIndex].points);
+            int points = UnityEngine.Random.Range(dance.moves[currentMoveIndex].points - noise, dance.moves[currentMoveIndex].points);
+            score += points;
             danceUI.SetScore(score);
             scorable = false;
-            return true;
+            Debug.Log($"Rewarded {points} for {gesture}");
         }
         return false;
 	}
@@ -183,10 +187,7 @@ public class DancePlayer : MonoBehaviour, KinectGestures.GestureListenerInterfac
 	public bool GestureCancelled (uint userId, int userIndex, KinectGestures.Gestures gesture, 
 	                              KinectWrapper.NuiSkeletonPositionIndex joint)
 	{
-		if (gesture == KinectGestures.Gestures.Clap) {
-			print("clap cancelled");
-		}
-		return true;
+        return false;
 	}
 	
     // Source: https://answers.unity.com/questions/1518536/load-audioclip-from-folder-on-computer-into-game-i.html

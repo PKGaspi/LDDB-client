@@ -1028,9 +1028,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   danceUI: {fileID: 867322450}
-  danceFileName: test_dance.dnc
-  songFileName: test_song.wav
-  endDelay: 10
+  danceFileName: test_dance_2.dnc
+  songFileName: test_song_2.wav
+  endDelay: 7
   countdownUI: {fileID: 1149256550}
   endParticles:
   - {fileID: 707135259}
@@ -1067,7 +1067,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 1.15
+  m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -1163,7 +1163,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 3efcb8550cede9949a1c3bf4e0319e53, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.15
-  m_Pitch: 1
+  m_Pitch: 1.15
   Loop: 0
   Mute: 0
   Spatialize: 0

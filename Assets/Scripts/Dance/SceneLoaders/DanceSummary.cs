@@ -13,6 +13,7 @@ public class DanceSummary : MonoBehaviour
 
     public void Show() {
         DontDestroyOnLoad(gameObject);
+        GameObject.Destroy(GameObject.Find("KinectManager"));
         SceneManager.LoadScene("Scenes/DanceResults");
     }
 }
