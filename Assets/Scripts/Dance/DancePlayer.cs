@@ -175,7 +175,13 @@ public class DancePlayer : MonoBehaviour, KinectGestures.GestureListenerInterfac
 	{
         if (scorable && gesture == dance.moves[currentMoveIndex].gesture) {
             int noise = dance.moves[currentMoveIndex].points / 10;
-            int points = UnityEngine.Random.Range(dance.moves[currentMoveIndex].points - noise, dance.moves[currentMoveIndex].points);
+            int points = dance.moves[currentMoveIndex].points;
+            
+            if (UnityEngine.Random.Range(0f, 1f) <= .25f) {
+                // Sorry, bad move!
+                points = (int) Math.Round(points * UnityEngine.Random.Range(.7f, .9f));
+            }
+
             score += points;
             danceUI.SetScore(score);
             scorable = false;
