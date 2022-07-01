@@ -179,7 +179,7 @@ public class DancePlayer : MonoBehaviour, KinectGestures.GestureListenerInterfac
             score += points;
             danceUI.SetScore(score);
             scorable = false;
-            Debug.Log($"Rewarded {points} for {gesture}");
+            Debug.Log($"Rewarded {points} for move #{currentMoveIndex} - {gesture}");
         }
         return false;
 	}
