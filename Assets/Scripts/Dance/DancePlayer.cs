@@ -57,7 +57,7 @@ public class DancePlayer : MonoBehaviour, KinectGestures.GestureListenerInterfac
             End();
         }
 
-        if (currentMoveIndex < dance.moves.Length) {
+        if (currentMoveIndex+1 < dance.moves.Length) {
             if (timestamp >= dance.moves[currentMoveIndex].endTime) {
                 // Advance to the next move.
                 currentMoveIndex++;
