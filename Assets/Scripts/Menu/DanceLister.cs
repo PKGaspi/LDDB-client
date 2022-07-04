@@ -11,6 +11,7 @@ public class DanceLister : MonoBehaviour
     public ScrollRect menuScrollRect;
     public Text messageText;
     public bool autoLoad;
+    public GameObject backMenuEntry;
     // Start is called before the first frame update
     async void Start()
     {
@@ -24,6 +25,7 @@ public class DanceLister : MonoBehaviour
                 break;
             default:
                 messageText.text = $"Error:\n{status.message}\n(code {status.code})";
+                backMenuEntry.SetActive(true);
                 break;
         }
     }
